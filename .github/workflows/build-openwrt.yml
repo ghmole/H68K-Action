@@ -99,7 +99,8 @@ jobs:
 
     - name: Generate Variables
       run: |
-        cd $OPENWRT_PATH
+        cd openwrt
+        
         SOURCE_REPO=$(echo $REPO_URL | awk -F '/' '{print $(NF)}')
         echo "SOURCE_REPO=$SOURCE_REPO"
         echo "SOURCE_REPO=$SOURCE_REPO" >> $GITHUB_ENV
@@ -109,6 +110,10 @@ jobs:
         DEVICE_CHIP_ARCH=$(grep '^CONFIG_TARGET.*DEVICE.*=y' .config |awk -F_ '{print $4}')
         echo "DEVICE_CHIP_ARCH=$DEVICE_CHIP_ARCH" 
         echo "DEVICE_CHIP_ARCH=$DEVICE_CHIP_ARCH" >> $GITHUB_ENV
+        
+        DEVICE_NAME=$(grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/')
+        echo "DEVICE_NAME=_$(DEVICE_NAME)" 
+        echo "DEVICE_NAME=_$(DEVICE_NAME)"  >> $GITHUB_ENV
         DEVICE_TARGET=$(cat .config | grep CONFIG_TARGET_BOARD | awk -F '"' '{print $2}')
         echo "DEVICE_TARGET=$DEVICE_TARGET" 
         echo "DEVICE_TARGET=$DEVICE_TARGET" >> $GITHUB_ENV
