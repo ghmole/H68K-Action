@@ -211,7 +211,7 @@ jobs:
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
-        files: ${{ env.FIRMWARE }}/*
+        files: ${{ env.FIRMWARE }}/openwrt-${{ env.DEVICE_CHIP }}-${{ env.DEVICE_CHIP_ARCH }}-${{ env.DEVICE_TARGET }}-squashfs-sysupgrade.*
 
     # - name: Deliver buildinfo
     #   uses: actions/upload-artifact@v2
