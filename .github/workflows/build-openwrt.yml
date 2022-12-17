@@ -151,7 +151,7 @@ jobs:
         echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
 
         # echo "::set-output name=status::success"
-        echo "{status}={success}" >> $GITHUB_OUTPUT
+        echo "status=success" >> $GITHUB_OUTPUT
         
 
     - name: Check space usage
@@ -175,7 +175,7 @@ jobs:
         rm -rf packages
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         #echo "::set-output name=status::success"
-        echo "{status}={success}" >> $GITHUB_OUTPUT
+        echo "status=success" >> $GITHUB_OUTPUT
 
 
     - name: Prepare artifact
@@ -202,12 +202,12 @@ jobs:
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
         # echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
-        echo "{release_tag}={$(date +"%Y.%m.%d-%H%M")}" >> $GITHUB_OUTPUT
+        echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
         touch release.txt
         # [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
         # [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         # echo "::set-output name=status::success"
-        echo "{status}={success}" >> $GITHUB_OUTPUT
+        echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware to release
       uses: softprops/action-gh-release@v1
